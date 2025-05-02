@@ -1,0 +1,78 @@
+@startuml
+title Warm House Container Diagram
+
+top to bottom direction
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Component.puml
+
+Person(user, "User", "User of the Warm House system")
+Person(admin, "Admin", "Admin of the Warm House system")
+
+Container(MessageBroker, "Message Broker", "Tibco", "Exchanges messages between Warn House Systems")
+
+Container_Boundary(AccountManagementContext, "Account Management Context") {
+  Container(WebApp, "Web Application", "Java, Spring", "Handles user requests (user's registration, device's registration, monitoring)")
+  Container(AccountManagementDatabase, "Database", "PostgreSQL", "Stores user data and devices")
+  Container(PartnerManagement, "Partner Management System", "Java, Spring", "Managing existing partners and provides ability to create new one")
+}
+
+System_Ext(externalAuthApi, "Authentication API", "Provides SSO Authentication")
+
+Rel(user, WebApp, "Uses the system")
+Rel(admin, WebApp,"Manages the Partners and their Settings")
+
+Rel(WebApp,AccountManagementDatabase,"Reads/Writes user and device data")
+Rel(WebApp,externalAuthApi,"Validates User's Credentials and provides token")
+Rel(WebApp, MessageBroker,"Sends messages about new device registration")
+Rel(WebApp, PartnerManagement, "Gets Information about Partners and available devices. Allows adding new Partners")
+Rel(PartnerManagement,AccountManagementDatabase,"Reads/Writes Partners and device data")
+
+
+
+Container_Boundary(TelemetryAndScenariosContext, "Telemetry And Scenarios Context") {
+  Container(TelemetryService, "TelemetryService", "Java, Spring", "Handles signals from devices and reacts according to scenarios")
+  Container(TelemetryAndScenariosDatabase, "Database", "MySQL", "Stores monitoring information from devices and user's scenarios")
+}
+Rel(TelemetryService, TelemetryAndScenariosDatabase, "Read/Write Device and Scenarios Data")
+Rel(WebApp, TelemetryService, "Read/Write Device and Scenarios Data")
+
+Container(TelemetryMessageBroker, "Telemetry Message Broker", "Tibco", "Exchanges messages from Partners to Telemetry")
+Rel(TelemetryMessageBroker, TelemetryService, "Receives messages about device states and actions from Partners")
+
+Container_Boundary(DeviceManagement, "Device Management Context") {
+  Container(ThermostatManagementService, "Thermostat Management Service", "Java, Spring", "Performs request routing for device type Thermostat")
+  Container(VideoCameraManagementService, "Video Camera Management Service", "Java, Spring", "Performs request routing for device type VideoCamera")
+  Container(ElectromechanicalDriverManagementService, "Electromechanical Driver Management Service", "Java, Spring", "Performs request routing for device type ElectromechanicalDriver")
+  Container(SmartSwitchManagementService, "Smart Switch Management Service", "Java, Spring", "Performs request routing for device type SmartSwitch")
+}
+
+
+System_Ext(ExternalPartnerService1, "Partner #1 Service", "Manages Devices Brand 'Partner #1'")
+System_Ext(ExternalPartnerService2, "Partner #2 Service", "Manages Devices Brand 'Partner #2'")
+System_Ext(ExternalPartnerServiceN, "Partner #N Service", "Manages Devices Brand 'Partner #N'")
+
+Rel(ExternalPartnerService1, TelemetryMessageBroker, "Receives messages about device states from Partner #1")
+Rel(ExternalPartnerService2, TelemetryMessageBroker, "Receives messages about device states from Partner #2")
+Rel(ExternalPartnerServiceN, TelemetryMessageBroker, "Receives messages about device states from Partner #3")
+
+Rel(MessageBroker, ThermostatManagementService, "Receives messages with type='Thermostat'")
+Rel(MessageBroker, VideoCameraManagementService, "Receives messages with type='VideoCamera'")
+Rel(MessageBroker, ElectromechanicalDriverManagementService, "Receives messages with type='ElectromechanicalDriver'")
+Rel(MessageBroker, SmartSwitchManagementService, "Receives messages with type='SmartSwitch'")
+
+Rel(ThermostatManagementService, ExternalPartnerService1, "Sends command on device's service")
+Rel(ThermostatManagementService, ExternalPartnerService2, "Sends command on device's service")
+Rel(ThermostatManagementService, ExternalPartnerServiceN, "Sends command on device's service")
+
+Rel(VideoCameraManagementService, ExternalPartnerService1, "Sends command on device's service")
+Rel(VideoCameraManagementService, ExternalPartnerService2, "Sends command on device's service")
+Rel(VideoCameraManagementService, ExternalPartnerServiceN, "Sends command on device's service")
+
+Rel(ElectromechanicalDriverManagementService, ExternalPartnerService1, "Sends command on device's service")
+Rel(ElectromechanicalDriverManagementService, ExternalPartnerService2, "Sends command on device's service")
+Rel(ElectromechanicalDriverManagementService, ExternalPartnerServiceN, "Sends command on device's service")
+
+Rel(SmartSwitchManagementService, ExternalPartnerService1, "Sends command on device's service")
+Rel(SmartSwitchManagementService, ExternalPartnerService2, "Sends command on device's service")
+Rel(SmartSwitchManagementService, ExternalPartnerServiceN, "Sends command on device's service")
+@enduml
