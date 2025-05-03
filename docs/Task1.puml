@@ -4,17 +4,20 @@ title Warm House Context Diagram
 !include <C4/C4_Container>
 
 
-Person(user, "User", "A user of the Warm House system")
-System(accountManagement, "Account Management", "Registration of new accounts, settings")
-System(deviceManagement, "Device Management", "Registration of new devices, settings, monitoring functions")
-System(customScripts, "Custom Scripts", "Creation, Editing, Removal Scripts, customization of devices interaction")
+Person(user, "User", "User of the Warm House system")
+Person(admin, "Admin", "Admin of the Warm House system")
+
+System(accountManagement, "Account Management", "Registration of new accounts, partners support")
+System(deviceManagement, "Device Management", "Registration of new devices, devices management")
+System(telemetryAndScenarios, "Telemetry And Scenarios", "Telemetry And Scenarios Management")
 System_Ext(partnerSystems, "Partner Systems", "Provides contracts for Devices")
+System_Ext(authenticationAPI, "Authentication API", "Provides SSO Authentication")
 
 Rel(user, accountManagement, "uses account")
-Rel(user, customScripts, "manages scripts")
-Rel(user, deviceManagement, "manages devices")
-Rel(customScripts, accountManagement, "gets user metadata")
-Rel(customScripts, deviceManagement, "makes integrations between devices")
+Rel(admin, accountManagement, "manages partners")
+Rel(accountManagement, authenticationAPI, "validates user's credentials")
+Rel(accountManagement, deviceManagement, "passes user's commands on devices")
+Rel(accountManagement, telemetryAndScenarios, "manages scenarios and collects monitoring data")
 Rel(deviceManagement, partnerSystems, "manages devices via external systems")
 
 @enduml
