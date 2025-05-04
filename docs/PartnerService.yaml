@@ -1,0 +1,63 @@
+openapi: 3.1.0
+info:
+  title: The Partner Management Service
+  description: The document describes interface of the service
+  version: 1.0.0
+servers:
+  - url: /api/v1
+paths:
+  /partners:
+    get:
+      summary: returns partners
+      responses:
+        '200':
+          $ref: '#/components/responses/PartnersWithPossibleDevicesResponse'
+        default:
+          $ref: '#/components/responses/Error'
+components:
+  schemas:
+    PartnerWithDevices:
+      description: partner with devices, which are supported by this partner
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        supportedDevices:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                format: uuid
+              name:
+                type: string
+
+  responses:
+    PartnersWithPossibleDevicesResponse:
+      description: returns all partners with supported devices list
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/PartnerWithDevices'
+
+    Error:
+      description: Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              timestamp:
+                type: string
+                format: date-time
+              status:
+                type: integer
+              error:
+                type: string
+

@@ -1,0 +1,59 @@
+openapi: 3.1.0
+info:
+  title: The Partner Management Service
+  description: The document describes interface of the service
+  version: 1.0.0
+servers:
+  - url: /api/v1
+paths:
+  /monitoring/device/{id}:
+    get:
+      summary: returns current state of device
+      parameters:
+        - $ref: '#/components/parameters/DeviceId'
+      responses:
+        '200':
+          $ref: '#/components/responses/DeviceState'
+        default:
+          $ref: '#/components/responses/Error'
+components:
+  parameters:
+    DeviceId:
+      in: path
+      name: id
+      required: true
+      schema:
+        type: string
+        format: uuid
+
+  responses:
+    DeviceState:
+      description: returns current device state
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+                format: uuid
+              isHeatingOn:
+                type: boolean
+              actualTemperature:
+                type: number
+                format: float
+
+    Error:
+      description: Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              timestamp:
+                type: string
+                format: date-time
+              status:
+                type: integer
+              error:
+                type: string

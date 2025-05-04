@@ -1,0 +1,61 @@
+openapi: 3.1.0
+info:
+  title: The Account Management Service
+  description: The document describes interface of the service
+  version: 1.0.0
+servers:
+  - url: /api/v1
+paths:
+  /devices/register:
+    post:
+      summary: register new device
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                serial_number:
+                  type: string
+                pin:
+                  type: string
+                device_type_id:
+                  type: string
+                  format: uuid
+                partner_id:
+                  type: string
+                  format: uuid
+                location_id:
+                  type: string
+                  format: uuid
+                user_id:
+                  type: string
+                  format: uuid
+      responses:
+        '200':
+          description: 'OK'
+        '400':
+          description: bad request
+        '409':
+          description: device was already registered
+        default:
+          $ref: '#/components/responses/Error'
+components:
+  responses:
+    Error:
+      description: Error
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              timestamp:
+                type: string
+                format: date-time
+              status:
+                type: integer
+              error:
+                type: string
+
