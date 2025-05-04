@@ -1,0 +1,71 @@
+@startuml
+title Warm House Code Diagram
+
+entity User {
+    * id: uuid pk
+    --
+    * email: text
+    * name: text
+}
+
+entity Location {
+    * id: uuid pk
+    --
+    * name: text
+    * user_id: uuid fk
+}
+
+Location }|..|| User
+
+entity DeviceType {
+    * id: uuid pk
+    --
+    * name: text
+}
+
+entity Partner {
+    * id: uuid pk
+    --
+    * name: text
+}
+
+entity Action {
+    * id: uuid pk
+    --
+    * name: text
+}
+
+entity PartnerDeviceTypeVariety {
+    * partner_id: uuid fk
+    * device_type_id: uuid fk
+}
+
+PartnerDeviceTypeVariety }|..|| DeviceType
+PartnerDeviceTypeVariety }|..|| Partner
+
+entity ActionDeviceTypeVariety {
+    * action_id: uuid fk
+    * device_type_id: uuid fk
+}
+
+ActionDeviceTypeVariety }|..|| DeviceType
+ActionDeviceTypeVariety }|..|| Action
+
+entity Device {
+    * id: uuid pk
+    --
+    * name: text
+    * state: text
+    * serial_number: text
+    * device_type_id: uuid fk
+    * partner_id: uuid fk
+    * location_id: uuid fk
+    * user_id: uuid fk
+}
+
+Device }|..|| DeviceType
+Device }|..|| Partner
+Device }|..|| Location
+Device }|..|| User
+
+@enduml

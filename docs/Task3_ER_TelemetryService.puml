@@ -1,0 +1,31 @@
+@startuml
+title Warm House Code Diagram
+
+entity VideoCamera {
+    * id: uuid pk
+    * is_switched_on: boolean
+}
+
+entity SmartSwitch {
+    * id: uuid pk
+    * is_switched_on: boolean
+}
+
+entity ElectromechanicalDriver {
+    * id: uuid pk
+    * is_open: boolean
+}
+
+entity Thermostat {
+    * id: uuid pk
+    * is_heating_on: boolean
+    * actual_temperature: float
+}
+
+entity Scenario {
+    * id: uuid pk
+    * user_id: uuid
+    * scenarioJson: json
+}
+
+@enduml
