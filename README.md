@@ -72,11 +72,14 @@
 
 **Диаграмма контейнеров (Containers)**
 
-Добавьте диаграмму.
+[Диаграмма контейнеров C4](https://github.com/evsi92/practicum-sprint-1/blob/warmhouse/docs/Task2_Container.puml)
 
 **Диаграмма компонентов (Components)**
 
-Добавьте диаграмму для каждого из выделенных микросервисов.
+[Диаграмма компонента С4 №1](https://github.com/evsi92/practicum-sprint-1/blob/warmhouse/docs/Task2_Component_WebApp.puml)
+[Диаграмма компонента С4 №2](https://github.com/evsi92/practicum-sprint-1/blob/warmhouse/docs/Task2_Component_PartnerService.puml)
+[Диаграмма компонента С4 №3](https://github.com/evsi92/practicum-sprint-1/blob/warmhouse/docs/Task2_Component_TelemetryService.puml)
+[Диаграмма компонента С4 №4](https://github.com/evsi92/practicum-sprint-1/blob/warmhouse/docs/Task2_Component_SmartSwitchManagementService.puml)
 
 **Диаграмма кода (Code)**
 
