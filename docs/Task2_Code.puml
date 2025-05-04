@@ -1,0 +1,47 @@
+@startuml
+title Warm House Code Diagram
+
+top to bottom direction
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Component.puml
+
+class User {
+  +UUID id
+  +String email
+  +String name
+  +List<Location> locations
+  +List<Device> devices
+  +void register()
+  +void addLocation()
+  +void addDevice()
+}
+
+class Location {
+  +UUID id
+  +String name
+  +void add()
+  +void remove()
+}
+
+class Device {
+  +UUID id
+  +String name
+  +String type
+  +Partner partner
+  +String serialNumber
+  +Location location
+  +void add()
+  +void remove()
+}
+
+class Partner {
+    +UUID id
+    +name
+}
+
+User "1" -- "0..*" Device : has
+User "1" -- "0..*" Location : has
+Device "1" -- "1" Location : has
+Device "1" -- "1" Partner : has
+
+@enduml
