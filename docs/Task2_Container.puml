@@ -8,11 +8,11 @@ top to bottom direction
 Person(user, "User", "User of the Warm House system")
 Person(admin, "Admin", "Admin of the Warm House system")
 
-Container(MessageBroker, "Message Broker", "Tibco", "Exchanges messages between Warn House Systems")
+Container(MessageBroker, "Message Broker", "Kafka", "Exchanges messages between Warn House Systems")
 
 Container_Boundary(AccountManagementContext, "Account Management Context") {
   Container(WebApp, "Web Application", "Java, Spring", "Handles user requests (user's registration, device's registration, monitoring)")
-  Container(AccountManagementDatabase, "Database", "PostgreSQL", "Stores user data and devices")
+  Container(AccountManagementDatabase, "Database", "PostgreSQL", "Stores user data, devices and partners information")
   Container(PartnerManagement, "Partner Management System", "Java, Spring", "Managing existing partners and provides ability to create new one")
 }
 
@@ -36,7 +36,7 @@ Container_Boundary(TelemetryAndScenariosContext, "Telemetry And Scenarios Contex
 Rel(TelemetryService, TelemetryAndScenariosDatabase, "Read/Write Device and Scenarios Data")
 Rel(WebApp, TelemetryService, "Read/Write Device and Scenarios Data")
 
-Container(TelemetryMessageBroker, "Telemetry Message Broker", "Tibco", "Exchanges messages from Partners to Telemetry")
+Container(TelemetryMessageBroker, "Telemetry Message Broker", "Kafka", "Exchanges messages from Partners to Telemetry")
 Rel(TelemetryMessageBroker, TelemetryService, "Receives messages about device states and actions from Partners")
 
 Container_Boundary(DeviceManagement, "Device Management Context") {

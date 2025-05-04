@@ -1,0 +1,30 @@
+@startuml
+title Warm House Web Application Component Diagram
+
+top to bottom direction
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Component.puml
+
+Container_Boundary(DeviceManagement, "Device Management Context") {
+  Container(SmartSwitchManagementService, "Smart Switch Management Service", "Java, Spring", "Performs request routing for device type SmartSwitch")
+  Container(TelemetryMessageBroker, "Telemetry Message Broker", "Kafka", "Exchanges messages from Partners to Telemetry")
+}
+
+Container(SmartSwitchManagementService, "Smart Switch Management Service") {
+  Component(MessageListener, "MessageListener", "Receives the messages with type='SmartSwitch'")
+
+  Component(ServiceLayer, "Service Layer", "Business logic")
+
+  Component(Partner1Api, "Partner1Api", "Sends command to Partner1 based on partner Id in message")
+  Component(Partner2Api, "Partner2Api", "Sends command to Partner2 based on partner Id in message")
+  Component(PartnerNApi, "PartnerNApi", "Sends command to PartnerN based on partner Id in message")
+}
+
+Rel(TelemetryMessageBroker,MessageListener,"Gets Messages")
+Rel(MessageListener,ServiceLayer,"Routs command to Partner API")
+
+Rel(ServiceLayer,Partner1Api,"Calls Partner's API")
+Rel(ServiceLayer,Partner2Api,"Calls Partner's API")
+Rel(ServiceLayer,PartnerNApi,"Calls Partner's API")
+
+@enduml
