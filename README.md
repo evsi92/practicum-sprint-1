@@ -76,24 +76,27 @@
 
 **Диаграмма компонентов (Components)**
 
-[Диаграмма компонента С4 №1](https://github.com/evsi92/practicum-sprint-1/blob/warmhouse/docs/Task2_Component_WebApp.puml)
-[Диаграмма компонента С4 №2](https://github.com/evsi92/practicum-sprint-1/blob/warmhouse/docs/Task2_Component_PartnerService.puml)
-[Диаграмма компонента С4 №3](https://github.com/evsi92/practicum-sprint-1/blob/warmhouse/docs/Task2_Component_TelemetryService.puml)
-[Диаграмма компонента С4 №4](https://github.com/evsi92/practicum-sprint-1/blob/warmhouse/docs/Task2_Component_SmartSwitchManagementService.puml)
+- [Диаграмма компонента С4 №1](https://github.com/evsi92/practicum-sprint-1/blob/warmhouse/docs/Task2_Component_WebApp.puml)
+- [Диаграмма компонента С4 №2](https://github.com/evsi92/practicum-sprint-1/blob/warmhouse/docs/Task2_Component_PartnerService.puml)
+- [Диаграмма компонента С4 №3](https://github.com/evsi92/practicum-sprint-1/blob/warmhouse/docs/Task2_Component_TelemetryService.puml)
+- [Диаграмма компонента С4 №4](https://github.com/evsi92/practicum-sprint-1/blob/warmhouse/docs/Task2_Component_SmartSwitchManagementService.puml)
 
 **Диаграмма кода (Code)**
 
-Добавьте одну диаграмму или несколько.
+[Диаграмма кода С4](https://github.com/evsi92/practicum-sprint-1/blob/warmhouse/docs/Task2_Code.puml)
 
 # Задание 3. Разработка ER-диаграммы
 
-Добавьте сюда ER-диаграмму. Она должна отражать ключевые сущности системы, их атрибуты и тип связей между ними.
+- [WebApp ER Диаграмма](https://github.com/evsi92/practicum-sprint-1/blob/warmhouse/docs/Task3_ER_WebApp.puml)
+- [Telemetry ER Диаграмма](https://github.com/evsi92/practicum-sprint-1/blob/warmhouse/docs/Task3_ER_TelemetryService.puml)
 
 # Задание 4. Создание и документирование API
 
 ### 1. Тип API
 
-Укажите, какой тип API вы будете использовать для взаимодействия микросервисов. Объясните своё решение.
+В текущей архитектуре планируется использовать 2 типа взаимодействия: REST API и AsyncAPI. 
+Асинхронное взаимодействие требуется для передачи команд в партнерские системы, непосредственно на технические устройства.
+Синхронная интеграция планируется для взаимодействия с пользователем и для взаимодействия систем.
 
 ### 2. Документация API
 
