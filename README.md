@@ -100,7 +100,11 @@
 
 ### 2. Документация API
 
-Здесь приложите ссылки на документацию API для микросервисов, которые вы спроектировали в первой части проектной работы. Для документирования используйте Swagger/OpenAPI или AsyncAPI.
+- [Swagger Web App](https://github.com/evsi92/practicum-sprint-1/blob/warmhouse/docs/contracts/WebApp.yaml)
+- [Swagger Partner Service](https://github.com/evsi92/practicum-sprint-1/blob/warmhouse/docs/contracts/PartnerService.yaml)
+- [Swagger Telemetry Service](https://github.com/evsi92/practicum-sprint-1/blob/warmhouse/docs/contracts/TelemetryService.yaml)
+- [AsyncAPI Inner Broker](https://github.com/evsi92/practicum-sprint-1/blob/warmhouse/docs/contracts/InnerMessageBroker.yaml)
+- [AsyncAPI Telemetry Broker](https://github.com/evsi92/practicum-sprint-1/blob/warmhouse/docs/contracts/TelemetryMessageBroker.yaml)
 
 # Задание 5. Работа с docker и docker-compose
 
