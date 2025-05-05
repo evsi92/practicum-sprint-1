@@ -1,0 +1,37 @@
+asyncapi: 2.4.0
+info:
+  title: The Warn House
+  version: 1.0.0
+
+servers:
+  production:
+    url: telemetry.broker.warmhouse.example.com
+    protocol: kafka
+
+channels:
+  warmhouse/device/update:
+    description: Updates from partners about devices
+    publish:
+      message:
+        $ref: '#/components/messages/DeviceUpdateMessage'
+
+components:
+  messages:
+    DeviceUpdateMessage:
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          device_type:
+            type: string
+            enum: [THERMOSTAT, SMART_SWITCH, VIDEO_CAMERA, ELECTROMECHANICAL_DRIVER]
+            description: the type of device to route message to necessary service
+      payload:
+        type: object
+        properties:
+          id:
+            type: string
+            format: uuid
+          actual_temperature:
+            type: number
+            format: float

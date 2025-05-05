@@ -1,0 +1,41 @@
+asyncapi: 2.4.0
+info:
+  title: The Warn House
+  version: 1.0.0
+
+servers:
+  production:
+    url: inner.broker.warmhouse.example.com
+    protocol: kafka
+
+channels:
+  warmhouse/device/registration:
+    description: Registration of new device
+    publish:
+      message:
+        $ref: '#/components/messages/DeviceRegistrationMessage'
+
+components:
+  messages:
+    DeviceRegistrationMessage:
+      contentType: application/json
+      headers:
+        type: object
+        properties:
+          device_type:
+            type: string
+            enum: [THERMOSTAT, SMART_SWITCH, VIDEO_CAMERA, ELECTROMECHANICAL_DRIVER]
+            description: the type of device to route message to necessary microservice
+      payload:
+        type: object
+        properties:
+          id:
+            type: string
+            format: uuid
+          serial_number:
+            type: string
+          pin:
+            type: string
+          partner_id:
+            type: string
+            format: uuid
