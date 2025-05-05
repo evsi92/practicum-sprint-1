@@ -4,10 +4,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class TemperatureResponse {
 
+    @JsonProperty("value")
     Float value;
+
+    @JsonProperty("unit")
     String unit;
+
+    @JsonProperty("timestamp")
     String timestamp;
+
+    @JsonProperty("location")
     String location;
+
+    @JsonProperty("status")
     String status;
 
     @JsonProperty("sensor_id")

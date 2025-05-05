@@ -19,7 +19,7 @@ public class TemperatureController {
     private SensorRepository sensorRepository;
 
     @GetMapping
-    public ResponseEntity<TemperatureResponse> getCurrentTemperatureInLocation(@RequestParam String location) {
+    public ResponseEntity<Sensor> getCurrentTemperatureInLocation(@RequestParam String location) {
         if (location == null || location.isEmpty()) {
             return ResponseEntity.badRequest().body(null);
         } else {
@@ -28,15 +28,15 @@ public class TemperatureController {
     }
 
     @GetMapping("/{sensorId}")
-    public ResponseEntity<TemperatureResponse> getCurrentTemperatureBySensorId(@PathVariable Integer sensorId) {
+    public ResponseEntity<Sensor> getCurrentTemperatureBySensorId(@PathVariable Integer sensorId) {
         return handleQueryResult(sensorRepository.findById(sensorId));
     }
 
-    private ResponseEntity<TemperatureResponse> handleQueryResult(Optional<Sensor> optionalSensor) {
+    private ResponseEntity<Sensor> handleQueryResult(Optional<Sensor> optionalSensor) {
         if (optionalSensor.isPresent()) {
             Sensor sensor = optionalSensor.get();
             sensor.setValue(TemperatureGenerator.getTemperature());
-            return ResponseEntity.ok(transform(sensor));
+            return ResponseEntity.ok(sensor);
         } else {
             return ResponseEntity.notFound().build();
         }
