@@ -20,7 +20,7 @@ public class TemperatureResponse {
     String status;
 
     @JsonProperty("sensor_id")
-    Integer id;
+    String id;
 
     @JsonProperty("sensor_type")
     String type;
@@ -28,7 +28,8 @@ public class TemperatureResponse {
     @JsonProperty("description")
     String name;
 
-    public TemperatureResponse(Float value, String unit, String timestamp, String location, String status, Integer id, String type, String name) {
+    public TemperatureResponse(Float value, String unit, String timestamp, String location, String status,
+                               String id, String type, String name) {
         this.value = value;
         this.unit = unit;
         this.timestamp = timestamp;

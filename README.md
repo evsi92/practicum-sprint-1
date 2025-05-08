@@ -64,7 +64,7 @@
 
 ### 5. Визуализация контекста системы — диаграмма С4
 
-[Диаграмма контекста C4](https://github.com/evsi92/practicum-sprint-1/blob/warmhouse/docs/Task1.puml)
+[Диаграмма контекста C4](./docs/Task1.puml)
 
 # Задание 2. Проектирование микросервисной архитектуры
 
@@ -72,23 +72,23 @@
 
 **Диаграмма контейнеров (Containers)**
 
-[Диаграмма контейнеров C4](https://github.com/evsi92/practicum-sprint-1/blob/warmhouse/docs/Task2_Container.puml)
+[Диаграмма контейнеров C4](./docs/Task2_Container.puml)
 
 **Диаграмма компонентов (Components)**
 
-- [Диаграмма компонента С4 №1](https://github.com/evsi92/practicum-sprint-1/blob/warmhouse/docs/Task2_Component_WebApp.puml)
-- [Диаграмма компонента С4 №2](https://github.com/evsi92/practicum-sprint-1/blob/warmhouse/docs/Task2_Component_PartnerService.puml)
-- [Диаграмма компонента С4 №3](https://github.com/evsi92/practicum-sprint-1/blob/warmhouse/docs/Task2_Component_TelemetryService.puml)
-- [Диаграмма компонента С4 №4](https://github.com/evsi92/practicum-sprint-1/blob/warmhouse/docs/Task2_Component_SmartSwitchManagementService.puml)
+- [Диаграмма компонента С4 №1](./docs/Task2_Component_WebApp.puml)
+- [Диаграмма компонента С4 №2](./docs/Task2_Component_PartnerService.puml)
+- [Диаграмма компонента С4 №3](./docs/Task2_Component_TelemetryService.puml)
+- [Диаграмма компонента С4 №4](./docs/Task2_Component_SmartSwitchManagementService.puml)
 
 **Диаграмма кода (Code)**
 
-[Диаграмма кода С4](https://github.com/evsi92/practicum-sprint-1/blob/warmhouse/docs/Task2_Code.puml)
+[Диаграмма кода С4](./docs/Task2_Code.puml)
 
 # Задание 3. Разработка ER-диаграммы
 
-- [WebApp ER Диаграмма](https://github.com/evsi92/practicum-sprint-1/blob/warmhouse/docs/Task3_ER_WebApp.puml)
-- [Telemetry ER Диаграмма](https://github.com/evsi92/practicum-sprint-1/blob/warmhouse/docs/Task3_ER_TelemetryService.puml)
+- [WebApp ER Диаграмма](./docs/Task3_ER_WebApp.puml)
+- [Telemetry ER Диаграмма](./docs/Task3_ER_TelemetryService.puml)
 
 # Задание 4. Создание и документирование API
 
@@ -100,11 +100,11 @@
 
 ### 2. Документация API
 
-- [Swagger Web App](https://github.com/evsi92/practicum-sprint-1/blob/warmhouse/docs/contracts/WebApp.yaml)
-- [Swagger Partner Service](https://github.com/evsi92/practicum-sprint-1/blob/warmhouse/docs/contracts/PartnerService.yaml)
-- [Swagger Telemetry Service](https://github.com/evsi92/practicum-sprint-1/blob/warmhouse/docs/contracts/TelemetryService.yaml)
-- [AsyncAPI Inner Broker](https://github.com/evsi92/practicum-sprint-1/blob/warmhouse/docs/contracts/InnerMessageBroker.yaml)
-- [AsyncAPI Telemetry Broker](https://github.com/evsi92/practicum-sprint-1/blob/warmhouse/docs/contracts/TelemetryMessageBroker.yaml)
+- [Swagger Web App](./docs/contracts/WebApp.yaml)
+- [Swagger Partner Service](./docs/contracts/PartnerService.yaml)
+- [Swagger Telemetry Service](./docs/contracts/TelemetryService.yaml)
+- [AsyncAPI Inner Broker](./docs/contracts/InnerMessageBroker.yaml)
+- [AsyncAPI Telemetry Broker](./docs/contracts/TelemetryMessageBroker.yaml)
 
 # Задание 5. Работа с docker и docker-compose
 

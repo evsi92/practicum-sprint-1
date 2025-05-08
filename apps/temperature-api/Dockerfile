@@ -1,13 +1,22 @@
-FROM openjdk:21-jdk
-
-# Set the working directory inside the container
+FROM maven:3.9.6-eclipse-temurin-21-alpine AS builder
 WORKDIR /app
 
-# Copy the JAR file into the container
-COPY target/temperature-api-1.0.jar app.jar
+# Copy project files & build
+COPY pom.xml .
+RUN mvn dependency:go-offline -B
 
-# Expose the port that the Spring Boot application listens on (default: 8080)
-EXPOSE 8080
+COPY src ./src
+RUN mvn clean package -DskipTests
 
-# Define the command to run the application
-ENTRYPOINT ["java", "-jar", "app.jar"]
+
+FROM openjdk:21-jdk-slim
+WORKDIR /app
+
+# Copy built JAR from previous stage
+COPY --from=builder /app/target/*.jar app.jar
+
+# Expose application port
+EXPOSE 8081
+
+# Start Spring Boot application
+CMD ["java", "-jar", "app.jar"]

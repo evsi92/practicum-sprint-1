@@ -9,17 +9,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/temperature")
 public class TemperatureController {
 
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSSS'Z'");
+
     @Autowired
     private SensorRepository sensorRepository;
 
     @GetMapping
-    public ResponseEntity<Sensor> getCurrentTemperatureInLocation(@RequestParam String location) {
+    public ResponseEntity<TemperatureResponse> getCurrentTemperatureInLocation(@RequestParam String location) {
         if (location == null || location.isEmpty()) {
             return ResponseEntity.badRequest().body(null);
         } else {
@@ -28,15 +31,15 @@ public class TemperatureController {
     }
 
     @GetMapping("/{sensorId}")
-    public ResponseEntity<Sensor> getCurrentTemperatureBySensorId(@PathVariable Integer sensorId) {
+    public ResponseEntity<TemperatureResponse> getCurrentTemperatureBySensorId(@PathVariable Integer sensorId) {
         return handleQueryResult(sensorRepository.findById(sensorId));
     }
 
-    private ResponseEntity<Sensor> handleQueryResult(Optional<Sensor> optionalSensor) {
+    private ResponseEntity<TemperatureResponse> handleQueryResult(Optional<Sensor> optionalSensor) {
         if (optionalSensor.isPresent()) {
             Sensor sensor = optionalSensor.get();
             sensor.setValue(TemperatureGenerator.getTemperature());
-            return ResponseEntity.ok(sensor);
+            return ResponseEntity.ok(transform(sensor));
         } else {
             return ResponseEntity.notFound().build();
         }
@@ -44,8 +47,8 @@ public class TemperatureController {
 
     private TemperatureResponse transform(Sensor sensor) {
         return new TemperatureResponse(sensor.getValue(), sensor.getUnit(),
-                LocalDateTime.now().toString(), sensor.getLocation(),
-                sensor.getStatus(), sensor.getId(),
+                LocalDateTime.now().format(FORMATTER), sensor.getLocation(),
+                sensor.getStatus(), sensor.getId().toString(),
                 sensor.getType(), sensor.getName());
     }
 }
